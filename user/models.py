@@ -12,9 +12,9 @@ class UserManager(DjangoUserManager):
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
-        """Create and save a User with the given email and password."""
         if not email:
             raise ValueError("The given email must be set")
+        extra_fields.setdefault("username", "")
         extra_fields.pop("username", None)
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -40,7 +40,7 @@ class UserManager(DjangoUserManager):
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=150, blank=True, null=True)
+    username = models.CharField(max_length=150, blank=True, default="")  # додай default
     email = models.EmailField(_("email address"), unique=True)
     objects = UserManager()
 
