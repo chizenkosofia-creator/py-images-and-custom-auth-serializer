@@ -13,9 +13,9 @@ from cinema.models import (
 
 
 class MovieImageSerializer(serializers.ModelSerializer):
-   class Meta:
-       model = Movie
-       fields = ("id", "image",)
+    class Meta:
+        model = Movie
+        fields = ("id", "image",)
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -80,6 +80,7 @@ class MovieSessionListSerializer(MovieSessionSerializer):
     )
     tickets_available = serializers.IntegerField(read_only=True)
     movie_image = serializers.ImageField(source="movie.image", read_only=True)
+
     class Meta:
         model = MovieSession
         fields = (
