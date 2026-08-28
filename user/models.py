@@ -40,7 +40,9 @@ class UserManager(DjangoUserManager):
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=150, blank=True, default="")  # додай default
+    username = models.CharField(max_length=150,
+                                blank=True,
+                                default="")
     email = models.EmailField(_("email address"), unique=True)
     objects = UserManager()
 
